@@ -1,0 +1,24 @@
+program code;
+var x, y, z, a, b, c : integer;
+q : array[2..3,3..2,6..5] of integer;
+
+begin
+z:=0;
+       x:=10;
+       while x>0 do
+       begin
+              y:=0;
+              while y < 10 do
+              begin
+                     y:=y+1;
+                     z:=z+1;
+              end;
+              y:=0;
+              while y < 10 do
+              begin
+                     y:=y+1;
+                     z:=z+1;
+              end;
+              x:=x-1;
+       end
+end.

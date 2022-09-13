@@ -1,0 +1,66 @@
+char data_segment[65536] = {0};
+int main() {
+_asm {
+PUSHAD
+LEA EBP, data_segment
+JMP kmain
+kmain:
+mov EAX, 0
+MOV [EBP + 8], EAX
+mov EAX, 10
+MOV [EBP + 0], EAX
+while0:
+MOV EAX, [EBP + 0]
+mov EBX, 0
+CMP EAX, EBX
+JG while0inner
+JMP endwhile0
+while0inner:
+mov EAX, 0
+MOV [EBP + 4], EAX
+while1:
+MOV EAX, [EBP + 4]
+mov EBX, 10
+CMP EAX, EBX
+JL while1inner
+JMP endwhile1
+while1inner:
+MOV EAX, [EBP + 4]
+mov EBX, 1
+ADD EAX, EAX, EBX
+MOV [EBP + 4], EAX
+MOV EAX, [EBP + 8]
+mov EBX, 1
+ADD EAX, EAX, EBX
+MOV [EBP + 8], EAX
+JMP while1
+endwhile1:
+mov EAX, 0
+MOV [EBP + 4], EAX
+while2:
+MOV EAX, [EBP + 4]
+mov EBX, 10
+CMP EAX, EBX
+JL while2inner
+JMP endwhile2
+while2inner:
+MOV EAX, [EBP + 4]
+mov EBX, 1
+ADD EAX, EAX, EBX
+MOV [EBP + 4], EAX
+MOV EAX, [EBP + 8]
+mov EBX, 1
+ADD EAX, EAX, EBX
+MOV [EBP + 8], EAX
+JMP while2
+endwhile2:
+MOV EAX, [EBP + 0]
+mov EBX, 1
+SUB EAX, EAX, EBX
+MOV [EBP + 0], EAX
+JMP while0
+endwhile0:
+POPAD
+}
+return 0;
+}
